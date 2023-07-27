@@ -21,3 +21,9 @@ Fonctions autorisées :
 | pthread_mutex_unlock | Déverrouille un mutex                               | `int pthread_mutex_unlock(pthread_mutex_t *mutex);`          | pthread.h              |
 
 
+
+
+Liens utiles : 
+
+°Documentation sur les threads et mutex (FR) :
+https://www.codequoi.com/threads-mutex-et-programmation-concurrente-en-c/
