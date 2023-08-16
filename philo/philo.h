@@ -11,10 +11,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h
+#include "string.h"
 #include "stdio.h"
 #include "stdlib.h"
 #include "unistd.h"
 #include "sys/time.h"
 #include "pthread.h"
 
+typedef struct	s_params
+{
+	int	n_philo;
+	int	t_die;
+	int	t_eat;
+	int	t_sleep;
+	int	n_t_eat;
+	pthread_mutex_t	*n_fork;
+}				t_params;
+
+typedef struct	s_philo
+{
+	int	name;
+}				t_philo;

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malleman <malleman@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,19 +12,14 @@
 
 #include "philo.h"
 
-pthread_t	create_threads(void)
+void    error_args(void)
 {
-
+	printf("Invalids arguments\n");
+	exit (1);
 }
-int	main(int ac, char **av)
-{
-	t_params	*data;
 
-	if (ac >= 5 && ac <= 6)
-	{
-		if (init_params(&data, av) != 0)
-			error_args();
-	}
-	else
-		error_args();
+void	error_mut(void)
+{
+	printf("Mutex init error\n");
+	exit (1);
 }
