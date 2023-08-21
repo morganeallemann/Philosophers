@@ -12,10 +12,6 @@
 
 #include "philo.h"
 
-pthread_t	create_threads(void)
-{
-
-}
 int	main(int ac, char **av)
 {
 	t_params	*data;
@@ -23,7 +19,9 @@ int	main(int ac, char **av)
 	if (ac >= 5 && ac <= 6)
 	{
 		if (init_params(&data, av) != 0)
-			error_args();
+        	error_arg();
+   		if (process(&data) != 0)
+			error_thread();
 	}
 	else
 		error_args();

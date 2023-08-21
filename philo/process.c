@@ -1,8 +1,7 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malleman <malleman@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,44 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
-#include "stdio.h"
-#include "stdlib.h"
-#include "unistd.h"
-#include "sys/time.h"
-#include "pthread.h"
+#include "philo.h"
 
-typedef struct	s_params
+int create_thread(t_params *data, t_philo *philo)
 {
-	int	n_philo;
-	int	t_die;
-	int	t_eat;
-	int	t_sleep;
-	int	n_eat;
-	long int	on;
-	int	off;
-	pthread_mutex_t	*fork;
-}				t_params;
+    int i;
 
-typedef struct	s_philo
+    i = 0;
+    while(i < data->n_philo)
+    {
+        if (pthread_create(&philo[i].tid, NULL, &thread_routine, &philo[i]))
+            return (1);
+        i++;
+    }
+    return (0);
+}
+
+int process(t_params *data)
 {
-	int	name;
-	int	nb_of_meal;
-	int dead;
-	int	loop;
-	long int t_start;
-	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*l_fork;
-	pthread_t	tid;
-	t_params	*data;
+    t_philo *philo;
 
-}				t_philo;
-
-void	error_mut(void);
-void    error_args(void);
-void	error_thread(void);
-int		ft_atoi(const char *str);
-
-int 	init_philo(t_params *data, t_philo *philo);
-
-void    thread_routine(void *actions);
+    philo = malloc(sizeof(t_philo) * data->n_philo);
+    if (!philo || init_philo(data, philo) != 0)
+        return (1);
+    if (create_thread(data, philo) != 0)
+        return (1);
+}

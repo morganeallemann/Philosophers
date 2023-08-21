@@ -1,8 +1,7 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malleman <malleman@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,44 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
-#include "stdio.h"
-#include "stdlib.h"
-#include "unistd.h"
-#include "sys/time.h"
-#include "pthread.h"
+#include "philo.h"
 
-typedef struct	s_params
+void    philo_eat(t_philo *philo)
 {
-	int	n_philo;
-	int	t_die;
-	int	t_eat;
-	int	t_sleep;
-	int	n_eat;
-	long int	on;
-	int	off;
-	pthread_mutex_t	*fork;
-}				t_params;
 
-typedef struct	s_philo
+}
+
+void    philo_sleep(t_philo *philo)
 {
-	int	name;
-	int	nb_of_meal;
-	int dead;
-	int	loop;
-	long int t_start;
-	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*l_fork;
-	pthread_t	tid;
-	t_params	*data;
 
-}				t_philo;
+}
 
-void	error_mut(void);
-void    error_args(void);
-void	error_thread(void);
-int		ft_atoi(const char *str);
+void    philo_think(t_philo *philo)
+{
+    
+}
 
-int 	init_philo(t_params *data, t_philo *philo);
+void    thread_routine(void *actions)
+{
+    t_philo philo;
 
-void    thread_routine(void *actions);
+    philo = (t_philo *)actions;
+
+
+}
