@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malleman <malleman@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -21,6 +21,18 @@ int create_thread(t_params *data, t_philo *philo)
     {
         if (pthread_create(&philo[i].tid, NULL, &thread_routine, &philo[i]))
             return (1);
+        i++;
+    }
+    data->on_t = get_time();
+    if (!data->on_t)
+    {
+        printf("Error: time setup failed\n");
+        exit (1);
+    }
+    i = 0;
+    while (i < data->n_philo)
+    {
+        philo[i].t_start = data->on_t;
         i++;
     }
     return (0);

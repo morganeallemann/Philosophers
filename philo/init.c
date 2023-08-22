@@ -28,8 +28,8 @@ int init_philo(t_params *data, t_philo *philo)
     i = 0;
     while(i < data->n_philo)
     {
-        philo[i].name = i;
-        philo[i].nb_of_meal = 0;
+        philo[i].name = i + 1;
+        philo[i].t_meal = 0;
         philo[i].dead = 0;
         philo[i].loop = 0;
         philo[i].l_fork = &data->fork[i];
@@ -49,7 +49,7 @@ int init_params(t_params *data, char **av)
     data->t_die = ft_atoi(av[2]);
     data->t_eat = ft_atoi(av[3]);
     data->t_sleep = ft_atoi(av[4]);
-    data->on = 0;
+    data->on_t = 0;
     data->off = 0;
     if (av[5])
     {

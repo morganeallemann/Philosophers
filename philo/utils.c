@@ -12,6 +12,20 @@
 
 #include "philo.h"
 
+void	print_text(t_philo *philo, char *type)
+{
+	if (type == FORK)
+		printf("%ldms %d has taken a fork\n", get_time(), philo->name);
+	else if (type == EAT)
+		printf("%ldms %d is eating\n", get_time(), philo->name);
+	else if (type == SLEEP)
+		printf("%ldms %d is sleeping\n", get_time(), philo->name);
+	else if (type == THINK)
+		printf("%ldms %d is thinking\n", get_time(), philo->name);
+	else if (type == DEAD)
+		printf("%ldms %d is died\n", get_time(), philo->name);
+}
+
 void    error_args(void)
 {
 	printf("Invalids arguments\n");
