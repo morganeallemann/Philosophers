@@ -1,8 +1,7 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malleman <malleman@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,44 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
-#include "stdio.h"
-#include "stdlib.h"
-#include "unistd.h"
-#include "sys/time.h"
-#include "pthread.h"
+#include "philo.h"
 
-typedef struct	s_params
+int	main(int ac, char **av)
 {
-	int	n_philo;
-	int	t_die;
-	int	t_eat;
-	int	t_sleep;
-	int	n_eat;
-	long int	on_t;
-	int	off;
-	pthread_mutex_t	*fork;
-}				t_params;
+	t_params	data;
 
-typedef struct	s_philo
-{
-	int	name;
-	int	t_meal;
-	int dead;
-	int	loop;
-	long int t_start;
-	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*l_fork;
-	pthread_t	tid;
-	t_params	*data;
-
-}				t_philo;
-
-void	error_mut(void);
-void    error_args(void);
-void	error_thread(void);
-int		ft_atoi(const char *str);
-
-int 	init_philo(t_params *data, t_philo *philo);
-
-void    thread_routine(void *actions);
+	if (ac >= 5 && ac <= 6)
+	{
+		if (init_params(&data, av) != 0)
+        	error_args();
+   		if (process(&data) != 0)
+			error_thread();
+	}
+	else
+		error_args();
+}

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   philo_checker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malleman <malleman@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,17 +12,24 @@
 
 #include "philo.h"
 
-int	main(int ac, char **av)
+int	philo_max_eat(t_params *data, t_philo *philo, int i)
 {
-	t_params	*data;
+	if (data->ctrl_eat == 1 && i == data->n_philo && data->n_eat == philo->loop)
+		return (1);
+	else
+		return (0);
+}
 
-	if (ac >= 5 && ac <= 6)
+int	philo_alive(t_params *data, t_philo *philo)
+{
+	int	time;
+
+	time = get_time();
+	if (time >= data->t_die)
 	{
-		if (init_params(&data, av) != 0)
-        	error_arg();
-   		if (process(&data) != 0)
-			error_thread();
+		philo_dead(philo);
+		return (1);
 	}
 	else
-		error_args();
+		return (0);
 }

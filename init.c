@@ -53,11 +53,12 @@ int init_params(t_params *data, char **av)
     data->off = 0;
     if (av[5])
     {
+        data->ctrl_eat = 1;
         data->n_eat = ft_atoi(av[5]);
         if (data->n_eat <= 0)
             return (1);
     }
-    if (check_value(&data) != 0)
+    if (check_value(data) != 0)
         return (1);
     data->fork = malloc(sizeof(pthread_mutex_t) * data->n_philo);
     while (++i < data->n_philo)

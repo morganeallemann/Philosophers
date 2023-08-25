@@ -10,13 +10,14 @@
 #                                                                              #
 # **************************************************************************** #
 #-------------------------- SOURCES -------------------------------------------#
-SRCS 		=	main.c init.c utils.c philo_actions.c process.c time_setup.c \
+SRC 		= 	main.c init.c utils.c philo_actions.c process.c time_setup.c \
+				philo_checker.c \
 
 #--------------------------	VARIABLES -----------------------------------------#
 
 NAME		= philo
 
-OBJS		= ${SRCS:.c=.o}
+OBJ			= ${SRC:.c=.o}
 
 CC			= gcc -pthread
 
@@ -37,12 +38,11 @@ all : subsystems $(NAME)
 
 %.o : %.c
 	@echo $(Y)Compiling [$<]...$(X)
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+	${CC} ${CFLAGS} -g -c $< -o ${<:.c=.o}
 	@printf $(UP)$(CUT)
 
 subsystems :
 	@echo $(B)
-	make -C all
 
 $(NAME): $(OBJ)
 	@echo $(Y)Compiling [$(SRC)]...$(X)
