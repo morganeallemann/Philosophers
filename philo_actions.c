@@ -19,21 +19,17 @@ void    philo_eat(t_philo *philo)
 	pthread_mutex_lock(philo->r_fork);
 	print_text(philo, "fork");
 	philo->t_meal = get_time();
-	usleep(philo->data->t_eat * 1000);
+	ft_usleep(philo, philo->data->t_eat);
 	print_text(philo, "eat");
 	philo->loop++;
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
 } 
 
-void    philo_sleep(t_philo *philo)
+void    philo_sleep_and_think(t_philo *philo)
 {
-	usleep(philo->data->t_sleep * 1000);
+	ft_usleep(philo, philo->data->t_sleep);
 	print_text(philo, "sleep");
-}
-
-void    philo_think(t_philo *philo)
-{
 	print_text(philo, "think");
 }
 
@@ -51,13 +47,12 @@ void    *thread_routine(void *actions)
 	t_philo *philo;
 
 	philo = (t_philo *)actions;
-	if (philo->name % 2 != 0)
+	if (philo->name % 2 == 0)
 		usleep(500);
 	while (!philo->data->off)
 	{
 		philo_eat(philo);
-		philo_sleep(philo);
-		philo_think(philo);
+		philo_sleep_and_think(philo);
 	}
 	return (NULL);
 }

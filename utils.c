@@ -34,16 +34,23 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 void	print_text(t_philo *philo, char *type)
 {
+	pthread_mutex_lock(philo->data->death);
+	if (philo->data->off)
+	{
+		pthread_mutex_unlock(philo->data->death);
+		return ;
+	}
 	if (ft_strncmp("fork", type, 4) == 0)
-		printf("%ld %d has taken a fork\n", get_time(), philo->name);
+		printf("%ldms %d has taken a fork\n", get_time() - philo->t_start, philo->name);
 	else if (ft_strncmp("eat", type, 3) == 0)
-		printf("%ld %d is eating\n", get_time(), philo->name);
+		printf("%ldms %d is eating\n", get_time() - philo->t_start, philo->name);
 	else if (ft_strncmp("sleep", type, 5) == 0)
-		printf("%ld %d is sleeping\n", get_time(), philo->name);
+		printf("%ldms %d is sleeping\n", get_time() - philo->t_start, philo->name);
 	else if (ft_strncmp("think", type, 5) == 0)
-		printf("%ld %d is thinking\n", get_time(), philo->name);
+		printf("%ldms %d is thinking\n", get_time() - philo->t_start, philo->name);
 	else if (ft_strncmp("dead", type, 4) == 0)
-		printf("%ld %d is died\n", get_time(), philo->name);
+		printf("%ldms %d is died\n", get_time() - philo->t_start, philo->name);
+	pthread_mutex_unlock(philo->data->death);
 }
 
 void	end_print(int status)

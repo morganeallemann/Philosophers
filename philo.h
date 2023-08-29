@@ -64,3 +64,4 @@ int			philo_alive(t_params *data, t_philo *philo);
 void		philo_dead(t_philo *philo);
 
 long int	get_time(void);
+void		ft_usleep(t_philo *philo, int time);

@@ -49,10 +49,11 @@ int init_mutex(t_params *data)
     data->death = malloc(sizeof(pthread_mutex_t));
     if (pthread_mutex_init(data->death, NULL) == -1)
         error_mut();
-    while (++i < data->n_philo)
+    while (i < data->n_philo)
     {
         if (pthread_mutex_init(&data->fork[i], NULL) == -1)
             error_mut();
+        i++;
     }
     return (0);
 }

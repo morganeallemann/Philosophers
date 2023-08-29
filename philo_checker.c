@@ -25,7 +25,7 @@ int	philo_alive(t_params *data, t_philo *philo)
 	int	time;
 
 	pthread_mutex_lock(data->death);
-	time = get_time();
+	time = get_time() - philo->t_meal;
 	if (time >= data->t_die)
 	{
 		pthread_mutex_unlock(data->death);

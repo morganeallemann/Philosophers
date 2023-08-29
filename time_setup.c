@@ -19,4 +19,16 @@ long int	get_time(void)
 	gettimeofday(&time, NULL);
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
+
+void	ft_usleep(t_philo *philo, int time)
+{
+	long int	start;
+
+	start = get_time();
+	while (!philo_alive(philo->data, philo) && get_time() - start < time)
+	{
+		usleep(150);
+	}
+	return ;
+}
  
