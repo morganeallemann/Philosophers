@@ -24,12 +24,17 @@ int	philo_alive(t_params *data, t_philo *philo)
 {
 	int	time;
 
+	pthread_mutex_lock(data->death);
 	time = get_time();
 	if (time >= data->t_die)
 	{
+		pthread_mutex_unlock(data->death);
 		philo_dead(philo);
 		return (1);
 	}
 	else
+	{
+		pthread_mutex_unlock(data->death);
 		return (0);
+	}
 }

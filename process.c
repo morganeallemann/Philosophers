@@ -72,7 +72,9 @@ void	end_process(t_params *data, t_philo *philo)
 		i++;
 	}
 	pthread_mutex_destroy(data->fork);
+	pthread_mutex_destroy(data->death);
 	free(data->fork);
+	free(data->death);
 	free(philo);
 }
 

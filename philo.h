@@ -29,6 +29,7 @@ typedef struct	s_params
 	long int	on_t;
 	int	off;
 	pthread_mutex_t	*fork;
+	pthread_mutex_t *death;
 }				t_params;
 
 typedef struct	s_philo

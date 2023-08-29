@@ -40,11 +40,25 @@ int init_philo(t_params *data, t_philo *philo)
     return (0);
 }
 
+int init_mutex(t_params *data)
+{
+    int i;
+
+    i = 0;
+    data->fork = malloc(sizeof(pthread_mutex_t) * data->n_philo);
+    data->death = malloc(sizeof(pthread_mutex_t));
+    if (pthread_mutex_init(data->death, NULL) == -1)
+        error_mut();
+    while (++i < data->n_philo)
+    {
+        if (pthread_mutex_init(&data->fork[i], NULL) == -1)
+            error_mut();
+    }
+    return (0);
+}
+
 int init_params(t_params *data, char **av)
 {
-    int     i;
-
-    i = -1;
     data->n_philo = ft_atoi(av[1]);
     data->t_die = ft_atoi(av[2]);
     data->t_eat = ft_atoi(av[3]);
@@ -58,13 +72,8 @@ int init_params(t_params *data, char **av)
         if (data->n_eat <= 0)
             return (1);
     }
+    init_mutex(data);
     if (check_value(data) != 0)
         return (1);
-    data->fork = malloc(sizeof(pthread_mutex_t) * data->n_philo);
-    while (++i < data->n_philo)
-    {
-        if (pthread_mutex_init(&data->fork[i], NULL) == -1)
-            error_mut();
-    }
     return (0);
 }
