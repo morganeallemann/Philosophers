@@ -12,20 +12,21 @@
 
 #include "philo.h"
 
-int	philo_max_eat(t_params *data, t_philo *philo, int i)
+int	philo_checker_eat(t_data *data, t_philo *philo, int i)
 {
-	if (data->ctrl_eat == 1 && i == data->n_philo && data->n_eat == philo->loop)
-		return (1);
+	if (data->ctrl_eat == 1 && i == data->nb_philo - 1
+		&& data->max_eat == philo->loop)
+		return (ft_usleep(300));
 	else
 		return (0);
 }
 
-int	philo_alive(t_params *data, t_philo *philo)
+int	philo_alive(t_data *data, t_philo *philo)
 {
-	int	time;
+	long int	time;
 
 	pthread_mutex_lock(data->death);
-	time = get_time() - philo->t_meal;
+	time = get_time() - philo->meal_time;
 	if (time >= data->t_die)
 	{
 		pthread_mutex_unlock(data->death);

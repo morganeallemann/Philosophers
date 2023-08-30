@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -18,50 +17,52 @@
 #include "sys/time.h"
 #include "pthread.h"
 
-typedef struct	s_params
+typedef struct s_data
 {
-	int	n_philo;
-	int	t_die;
-	int	t_eat;
-	int	t_sleep;
-	int	n_eat;
-	int	ctrl_eat;
-	long int	on_t;
-	int	off;
+	int				nb_philo;
+	int				t_die;
+	int				t_eat;
+	int				t_sleep;
+	int				max_eat;
+	int				ctrl_eat;
+	int				ready;
+	int				off;
+	long int		on;
 	pthread_mutex_t	*fork;
-	pthread_mutex_t *death;
-}				t_params;
+	pthread_mutex_t	*death;
+}				t_data;
 
-typedef struct	s_philo
+typedef struct s_philo
 {
-	int	name;
-	int	t_meal;
-	int dead;
-	int	loop;
-	long int t_start;
+	int				name;
+	int				dead;
+	int				loop;
+	long int		thd_start;
+	long int		meal_time;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
-	pthread_t	tid;
-	t_params	*data;
+	pthread_t		tid;
+	t_data			*data;
 
 }				t_philo;
 
 void		error_mut(void);
-void    	error_args(void);
+void		error_args(void);
 void		error_thread(void);
+void		error_malloc(void);
 void		print_text(t_philo *philo, char *type);
 void		end_print(int status);
 int			ft_atoi(char *str);
 
-int 		init_philo(t_params *data, t_philo *philo);
-int 		init_params(t_params *data, char **av);
+int			init_philo(t_data *data, t_philo *philo);
+int			init_data(t_data *data, char **av);
 
-int 		process(t_params *data);
+int			process(t_data *data);
 void		*thread_routine(void *actions);
 
-int 		philo_max_eat(t_params *data, t_philo *philo, int i);
-int			philo_alive(t_params *data, t_philo *philo);
+int			philo_checker_eat(t_data *data, t_philo *philo, int i);
+int			philo_alive(t_data *data, t_philo *philo);
 void		philo_dead(t_philo *philo);
 
 long int	get_time(void);
-void		ft_usleep(t_philo *philo, int time);
+int			ft_usleep(int time);

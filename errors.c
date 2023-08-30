@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   eroors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malleman <malleman@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,17 +12,26 @@
 
 #include "philo.h"
 
-int	main(int ac, char **av)
+void	error_args(void)
 {
-	t_data	data;
+	printf("Error: Invalids arguments\n");
+	exit (1);
+}
 
-	if (ac == 5 || ac == 6)
-	{
-		if (init_data(&data, av) != 0)
-			error_args();
-		if (process(&data) != 0)
-			error_thread();
-	}
-	else
-		error_args();
+void	error_mut(void)
+{
+	printf("Error: Mutex init failed\n");
+	exit (1);
+}
+
+void	error_thread(void)
+{
+	printf("Error: Thread failed\n");
+	exit (1);
+}
+
+void	error_malloc(void)
+{
+	printf("Error: Memory allocation failed\n");
+	exit (1);
 }

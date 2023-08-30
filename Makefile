@@ -11,7 +11,7 @@
 # **************************************************************************** #
 #-------------------------- SOURCES -------------------------------------------#
 SRC 		= 	main.c init.c utils.c philo_actions.c process.c time_setup.c \
-				philo_checker.c \
+				philo_checker.c errors.c \
 
 #--------------------------	VARIABLES -----------------------------------------#
 
@@ -21,7 +21,7 @@ OBJ			= ${SRC:.c=.o}
 
 CC			= gcc -pthread
 
-CFLAGSDDBUG	= -Wall -Wextra -Werror -I. -Iincludes -g -fsanitize=address
+CFLAGSDDBUG	= -Wall -Wextra -Werror -I. -Iincludes -g -fsanitize=thread
 CFLAGS		= -Wall -Wextra -Werror -I. -Iincludes -g3
 
 #-------------------------- COMMANDES -----------------------------------------#
