@@ -14,11 +14,18 @@
 
 int	philo_checker_eat(t_data *data, t_philo *philo, int i)
 {
+	pthread_mutex_lock(philo->data->death);
 	if (data->ctrl_eat == 1 && i == data->nb_philo - 1
 		&& data->max_eat == philo->loop)
+	{
+		pthread_mutex_unlock(philo->data->death);
 		return (ft_usleep(300));
+	}
 	else
+	{
+		pthread_mutex_unlock(philo->data->death);
 		return (0);
+	}
 }
 
 int	philo_alive(t_data *data, t_philo *philo)

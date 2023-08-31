@@ -18,7 +18,6 @@ int	create_thread(t_data *data, t_philo *philo)
 
 	i = 0;
 	data->on = get_time();
-
 	while (i < data->nb_philo)
 	{
 		philo[i].thd_start = data->on;
@@ -34,7 +33,6 @@ int	create_thread(t_data *data, t_philo *philo)
 			return (1);
 		i++;
 	}
-	
 	return (0);
 }
 

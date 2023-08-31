@@ -23,7 +23,9 @@ void	philo_eat(t_philo *philo)
 	pthread_mutex_unlock(philo->data->death);
 	ft_usleep(philo->data->t_eat);
 	print_text(philo, "eat");
+	pthread_mutex_lock(philo->data->death);
 	philo->loop++;
+	pthread_mutex_unlock(philo->data->death);
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
 }
@@ -53,10 +55,14 @@ void	*thread_routine(void *actions)
 	philo = (t_philo *)actions;
 	if (philo->name % 2 == 0)
 		usleep(500);
+	pthread_mutex_lock(philo->data->death);
 	while (!philo->data->off)
 	{
+		pthread_mutex_unlock(philo->data->death);
 		philo_eat(philo);
 		philo_sleep_and_think(philo);
+		pthread_mutex_lock(philo->data->death);
 	}
+	pthread_mutex_unlock(philo->data->death);
 	return (NULL);
 }
