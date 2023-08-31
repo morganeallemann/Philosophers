@@ -25,4 +25,5 @@ int	main(int ac, char **av)
 	}
 	else
 		error_args();
+	return (0);
 }

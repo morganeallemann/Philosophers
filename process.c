@@ -33,7 +33,6 @@ int	create_thread(t_data *data, t_philo *philo)
 		philo[i].meal_time = data->on;
 		i++;
 	}
-	data->ready = 1;
 	return (0);
 }
 
@@ -41,8 +40,6 @@ int	thread_control(t_data *data, t_philo *philo)
 {
 	int	i;
 
-	while (!data->ready)
-		continue ;
 	while (!data->off)
 	{
 		i = 0;
@@ -56,7 +53,7 @@ int	thread_control(t_data *data, t_philo *philo)
 	if (data->ctrl_eat == 1 && data->max_eat == philo[data->nb_philo - 1].loop)
 	{
 		ft_usleep(5 * data->nb_philo);
-		printf("Philosophers have eaten %d\n times", data->max_eat);
+		printf("Philosophers have eaten %d times\n", data->max_eat);
 		return (0);
 	}
 	return (1);

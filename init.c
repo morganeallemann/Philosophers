@@ -26,13 +26,13 @@ int	check_arg(char **av)
 	int	i;
 	int	j;
 
-	i = 0;
+	i = 1;
 	while (av[i])
 	{
 		j = 0;
 		while (av[i][j])
 		{
-			if (!(av[i][j] >= 0 && av[i][j] <= 9))
+			if (!(av[i][j] >= '0' && av[i][j] <= '9'))
 				return (1);
 			j++;
 		}
@@ -66,8 +66,6 @@ int	init_mutex(t_data *data)
 	int	i;
 
 	i = 0;
-	if (check_arg != 0)
-		return (1);
 	data->fork = 0;
 	data->death = 0;
 	data->fork = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
@@ -95,7 +93,6 @@ int	init_data(t_data *data, char **av)
 	data->t_sleep = ft_atoi(av[4]);
 	data->max_eat = -2;
 	data->ctrl_eat = 0;
-	data->ready = 0;
 	data->on = 0;
 	data->off = 0;
 	if (av[5])
@@ -104,6 +101,8 @@ int	init_data(t_data *data, char **av)
 		data->max_eat = ft_atoi(av[5]);
 	}
 	if (check_value(data) != 0)
+		return (1);
+	if (check_arg(av) != 0)
 		return (1);
 	if (init_mutex(data) != 0)
 		error_malloc();

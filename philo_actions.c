@@ -47,8 +47,6 @@ void	*thread_routine(void *actions)
 	t_philo	*philo;
 
 	philo = (t_philo *)actions;
-	while (!philo->data->ready)
-		continue ;
 	if (philo->name % 2 == 0)
 		usleep(500);
 	while (!philo->data->off)
