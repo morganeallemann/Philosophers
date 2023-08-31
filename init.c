@@ -15,7 +15,7 @@
 int	check_value(t_data *data)
 {
 	if (data->nb_philo <= 0 || data->t_die <= 0 || data->t_eat <= 0
-		|| data->t_sleep <= 0)
+		|| data->t_sleep <= 0 || data->max_eat == 0)
 		return (1);
 	else
 		return (0);

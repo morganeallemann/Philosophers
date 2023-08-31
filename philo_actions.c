@@ -18,7 +18,9 @@ void	philo_eat(t_philo *philo)
 	print_text(philo, "fork");
 	pthread_mutex_lock(philo->r_fork);
 	print_text(philo, "fork");
+	pthread_mutex_lock(philo->data->death);
 	philo->meal_time = get_time();
+	pthread_mutex_unlock(philo->data->death);
 	ft_usleep(philo->data->t_eat);
 	print_text(philo, "eat");
 	philo->loop++;
@@ -37,7 +39,9 @@ void	philo_dead(t_philo *philo)
 {
 	print_text(philo, "dead");
 	philo->dead = 1;
+	pthread_mutex_lock(philo->data->death);
 	philo->data->off = 1;
+	pthread_mutex_unlock(philo->data->death);
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
 }

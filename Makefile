@@ -21,8 +21,8 @@ OBJ			= ${SRC:.c=.o}
 
 CC			= gcc -pthread
 
-CFLAGSDDBUG	= -Wall -Wextra -Werror -I. -Iincludes -g -fsanitize=thread
-CFLAGS		= -Wall -Wextra -Werror -I. -Iincludes -g3
+CFLAGSDDBUG	= -Wall -Wextra -Werror -I. -Iincludes -g 
+CFLAGS		= -Wall -Wextra -Werror -I. -Iincludes -g3 -fsanitize=thread
 
 #-------------------------- COMMANDES -----------------------------------------#
 

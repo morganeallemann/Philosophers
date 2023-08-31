@@ -17,6 +17,15 @@ int	create_thread(t_data *data, t_philo *philo)
 	int	i;
 
 	i = 0;
+	data->on = get_time();
+
+	while (i < data->nb_philo)
+	{
+		philo[i].thd_start = data->on;
+		philo[i].meal_time = data->on;
+		i++;
+	}
+	i = 0;
 	while (i < data->nb_philo)
 	{
 		philo[i].r_fork = philo[(i + 1) % data->nb_philo].l_fork;
@@ -25,14 +34,7 @@ int	create_thread(t_data *data, t_philo *philo)
 			return (1);
 		i++;
 	}
-	data->on = get_time();
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		philo[i].thd_start = data->on;
-		philo[i].meal_time = data->on;
-		i++;
-	}
+	
 	return (0);
 }
 
@@ -46,7 +48,11 @@ int	thread_control(t_data *data, t_philo *philo)
 		while (i < data->nb_philo)
 		{
 			if (philo_alive(data, philo) || philo_checker_eat(data, philo, i))
-				data->off = 1;
+			{
+				pthread_mutex_lock(philo->data->death);
+				philo->data->off = 1;
+				pthread_mutex_unlock(philo->data->death);
+			}
 			i++;
 		}
 	}
